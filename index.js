@@ -9,12 +9,9 @@ const port = 5001;
 app.use(cors());
 app.use(express.json());
 
-app.use(requestIp.mw());
-
-const express = require('express')
-const requestIp = require('request-ip')
-const app = express()
-const port = 3000
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
 
 app.get('/api/get-ip', (req, res) => {
   var clientIp = requestIp.getClientIp(req)
@@ -23,11 +20,6 @@ app.get('/api/get-ip', (req, res) => {
   //   serverIp,
   // });
 })
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
-
 // app.get("/api/get-ip", (req, res) => {
 //   let serverIp = "";
 //   const interfaces = os.networkInterfaces();
