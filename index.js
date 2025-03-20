@@ -9,9 +9,6 @@ const port = 5002;
 app.use(cors());
 app.use(express.json());
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
 
 app.get('/api/get-ip', (req, res) => {
   var clientIp = requestIp.getClientIp(req)
