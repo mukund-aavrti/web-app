@@ -9,14 +9,29 @@ const port = 5002;
 app.use(cors());
 app.use(express.json());
 
+app.get("/api/get-ip", (req, res) => {
+  const interfaces = os.networkInterfaces();
+  const ips = [];
 
-app.get('/api/get-ip', (req, res) => {
-  var clientIp = requestIp.getClientIp(req)
-  res.send(`Your IP Address is ${clientIp}.`)
-  //   res.json({
-  //   serverIp,
-  // });
-})
+  for (const name in interfaces) {
+    for (const net of interfaces[name]) {
+      if (net.family === "IPv4" && !net.internal) {
+        ips.push(net.address);
+      }
+    }
+  }
+
+  res.json({ serverIps: ips });
+});
+
+
+// app.get('/api/get-ip', (req, res) => {
+//   var clientIp = requestIp.getClientIp(req)
+//   res.send(`Your IP Address is ${clientIp}.`)
+//   //   res.json({
+//   //   serverIp,
+//   // });
+// })
 // app.get("/api/get-ip", (req, res) => {
 //   let serverIp = "";
 //   const interfaces = os.networkInterfaces();
